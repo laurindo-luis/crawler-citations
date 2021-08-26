@@ -10,13 +10,15 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static java.util.Objects.nonNull;
 
 public class Crawler {
     private final WebDriver webDriver;
 
-    private final String XPathCitationsScienceDirect = "//*[@id=\"citing-articles-header\"]";
+    private final String XPathCitationsScienceDirect = "//*[@id=\"mathjax-container\"]/div[2]/div[2]/aside";
     private final String XPathCitationsIEEEXplorer = "//*[@id=\"LayoutWrapper\"]/div/div/div/div[3]/div/" +
             "xpl-root/div/xpl-document-details/div/div[1]/section[2]/div/xpl-document-header/section/div[2]/" +
             "div/div/div[2]/div[2]/div[1]/div[1]";
@@ -38,42 +40,46 @@ public class Crawler {
     public List<Paper> searchCitations(List<Paper> papers) {
         List<Paper> listPapers = new ArrayList<>();
         WriteFileCSV writeFileCSV = new WriteFileCSV("articles_citations.csv");
-        writeFileCSV.setLabels("Doi", "Title", "Year", "Number of Citations");
+        writeFileCSV.setLabels("Doi", "Title", "Digital Library", "Year", "Number of Citations");
 
         papers.forEach(paper -> {
-            if(nonNull(paper.getDoi())) {
-                webDriver.get(paper.getDoi());
-                String url = webDriver.getCurrentUrl();
+            if(!paper.getDoi().isEmpty() || !paper.getUrl().isEmpty()) {
+                System.out.println("> Search citation paper "+paper.getTitle());
 
-                System.out.println(String.format("> Search citation paper %s. DOI %s",
-                        paper.getTitle(), paper.getDoi()));
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                if(paper.getSource().equals("Scopus") && !paper.getUrl().isEmpty())
+                    webDriver.get(paper.getUrl());
+                else
+                    webDriver.get(paper.getDoi());
+
+                String urlBrowser = webDriver.getCurrentUrl();
+                Utils.sleep(3000);
 
                 String numberOfCitations = "0";
-
-                if(url.contains("www.scopus.com")) {
-
-                    if(!loginDigitalLibrary.isStatusLogin()) {
-                        //Realizar Login
-                        loginDigitalLibrary.authentication(webDriver, "luis.laurindo@discente.ufma.br",
-                                "rockandrollcar1996");
-                    }
-
-                } else if(url.contains("dl.acm.org")) {
+                if(urlBrowser.contains("www.scopus.com")) {
+//                    if(loginDigitalLibrary.isStatusLogin()) {
+//
+//                    } else {
+//                        loginDigitalLibrary.authentication(webDriver, "luis.laurindo@discente.ufma.br",
+//                                "rockandrollcar1996");
+//                        System.out.println("Realizar Login");
+//                    }
+                } else if(urlBrowser.contains("dl.acm.org")) {
                     numberOfCitations = webDriver.findElement(By.xpath(XPathCitationsACM)).getText();
-                } else if(url.contains("ieeexplore.ieee.org")) {
+                } else if(urlBrowser.contains("ieeexplore.ieee.org")) {
                     String textCitations = webDriver.findElement(By.xpath(XPathCitationsIEEEXplorer)).getText();
                     if(textCitations.contains("Citation"))
                         numberOfCitations = textCitations.split("\n")[0];
-                    else
-                        numberOfCitations = "0";
-                } else if(url.contains("www.sciencedirect.com")) {
+                } else if(urlBrowser.contains("www.sciencedirect.com")) {
                     String textCitations = webDriver.findElement(By.xpath(XPathCitationsScienceDirect)).getText();
-                    numberOfCitations = textCitations.replaceAll("[^0-9]+", "");
+
+                    Pattern pattern = Pattern.compile("Citing articles \\([0-9]+\\)");
+                    Matcher matcher = pattern.matcher(textCitations);
+                    String resultMatecher = "";
+                    while (matcher.find()) {
+                        resultMatecher = matcher.group();
+                    }
+
+                    numberOfCitations = resultMatecher.replaceAll("[^0-9]+", "");
                 }
 
                 Paper paperResponse = new Paper.Builder()

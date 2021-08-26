@@ -14,7 +14,7 @@ import static java.util.Objects.nonNull;
 
 public class ReaderFile {
 
-    public static List<Paper> reader(String path) {
+    public static List<Paper> readerXlsParsifal(String path) {
         List<Paper> papers = new ArrayList<>();
 
         try {
@@ -34,6 +34,7 @@ public class ReaderFile {
                     }
                     String source = isNull(row.getCell(5)) ? "" : row.getCell(5).getStringCellValue();
                     String doi = isNull(row.getCell(10)) ? "" : row.getCell(10).getStringCellValue();
+                    String url = isNull(row.getCell(11)) ? "" : row.getCell(11).getStringCellValue();
                     String status = isNull(row.getCell(24)) ? "" : row.getCell(24).getStringCellValue();
 
                     if(title.isEmpty() && year.equals("0") && doi.isEmpty() && status.isEmpty())
@@ -44,6 +45,7 @@ public class ReaderFile {
                         Paper paper = new Paper.Builder()
                                 .setDoi(doi)
                                 .setTitle(title)
+                                .setUrl(url)
                                 .setSource(source)
                                 .setYear(Integer.valueOf(year))
                                 .build();
@@ -68,7 +70,8 @@ public class ReaderFile {
         if (!doi.isEmpty())
             if (!doi.startsWith("https://doi.org/"))
                 return "https://doi.org/".concat(doi);
-            
-        return null;
+            else
+                return doi;
+        return "";
     }
 }

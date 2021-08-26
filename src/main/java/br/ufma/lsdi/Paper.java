@@ -4,6 +4,7 @@ public class Paper {
     private String doi;
     private String title;
     private String source;
+    private String url;
     private Integer year;
     private Integer numberOfCitations;
 
@@ -24,13 +25,18 @@ public class Paper {
             return this;
         }
 
+        public Builder setSource(String source) {
+            paper.setSource(source);
+            return this;
+        }
+
         public Builder setYear(Integer year) {
             paper.setYear(year);
             return this;
         }
 
-        public Builder setSource(String source) {
-            paper.setSource(source);
+        public Builder setUrl(String url) {
+            paper.setUrl(url);
             return this;
         }
 
@@ -60,6 +66,14 @@ public class Paper {
         return title;
     }
 
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url){
+        this.url = url;
+    }
+
     public String getSource() {
         return source;
     }
@@ -82,7 +96,7 @@ public class Paper {
 
     @Override
     public String toString() {
-        return String.format("DOI: %s | Title: %s | Year: %s | Source: %s", doi, title, year,
-                source);
+        return String.format("DOI: %s | Title: %s | Year: %s | Url: %s | Source: %s", doi, title, year,
+                url, source);
     }
 }
