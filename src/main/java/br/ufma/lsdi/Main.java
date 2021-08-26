@@ -8,10 +8,7 @@ public class Main {
         ReaderFile readerFile = new ReaderFile();
         List<Paper> papers = readerFile.reader("articles_2.xls");
 
-        papers.forEach(paper -> {
-            System.out.println(String.format("DOI -> %s - TITLE -> %s - YEAR -> %s - CITATIONS -> %s",
-                    paper.getDoi(), paper.getTitle(), paper.getYear(), paper.getNumberOfCitations()));
-        });
+        papers.forEach(paper -> System.out.println(paper));
 
         Crawler crawler = new Crawler();
         papers = crawler.searchCitations(papers);

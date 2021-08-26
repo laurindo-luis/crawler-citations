@@ -9,6 +9,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.util.Objects.nonNull;
+
 public class Crawler {
     private WebDriver webDriver;
 
@@ -35,7 +37,7 @@ public class Crawler {
         writeFileCSV.setLabels("Doi", "Title", "Year", "Number of Citations");
 
         papers.forEach(paper -> {
-            if(!paper.getDoi().isEmpty()) {
+            if(nonNull(paper.getDoi())) {
                 webDriver.get(paper.getDoi());
                 String url = webDriver.getCurrentUrl();
 

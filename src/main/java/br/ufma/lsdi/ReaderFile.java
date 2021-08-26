@@ -18,8 +18,7 @@ public class ReaderFile {
         List<Paper> papers = new ArrayList<>();
 
         try {
-            FileInputStream fileInputStream = new FileInputStream(path);
-            HSSFWorkbook workbook = new HSSFWorkbook(fileInputStream);
+            HSSFWorkbook workbook = new HSSFWorkbook(new FileInputStream(path));
 
             for (Row row : workbook.getSheetAt(0)) {
                 Integer numberRow = row.getRowNum();
@@ -36,17 +35,11 @@ public class ReaderFile {
                     String doi = isNull(row.getCell(10)) ? "" : row.getCell(10).getStringCellValue();
                     String status = isNull(row.getCell(24)) ? "" : row.getCell(24).getStringCellValue();
 
-                    if(title.isEmpty() && year.equals("0") && doi.isEmpty() && status.isEmpty()) {
+                    if(title.isEmpty() && year.equals("0") && doi.isEmpty() && status.isEmpty())
                         break;
-                    }
 
                     if(!status.equals("Duplicated")) {
-                        if (!doi.isEmpty()) {
-                            if (!doi.startsWith("https://doi.org/")) {
-                                doi = "https://doi.org/".concat(doi);
-                            }
-                        }
-
+                        doi = doiFormat(doi);
                         Paper paper = new Paper.Builder()
                                 .setDoi(doi)
                                 .setTitle(title)
@@ -63,5 +56,13 @@ public class ReaderFile {
         }
 
         return papers;
+    }
+
+    private String doiFormat(String doi) {
+        if (!doi.isEmpty())
+            if (!doi.startsWith("https://doi.org/"))
+                return "https://doi.org/".concat(doi);
+            
+        return null;
     }
 }
