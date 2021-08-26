@@ -1,5 +1,6 @@
 package br.ufma.lsdi;
 
+import br.ufma.lsdi.authentication.Credential;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
@@ -62,8 +63,16 @@ public class ReaderFile {
         return papers;
     }
 
-    private void readCredentias() {
-
+    public static Credential readCredentias(String path) {
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(path));
+            String user = bufferedReader.readLine().split(":")[1].trim();
+            String password = bufferedReader.readLine().split(":")[1].trim();
+            return new Credential(user, password);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     private static String doiFormat(String doi) {

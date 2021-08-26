@@ -5,7 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class ScopusLogin implements LoginDigitalLibrary {
+public class ScopusLoginDigitalLibrary implements LoginDigitalLibrary {
 
     private boolean statusLogin;
 
@@ -32,7 +32,7 @@ public class ScopusLogin implements LoginDigitalLibrary {
         WebElement buttonSignInFinal = webDriver.findElement(By.xpath("//*[@id=\"bdd-elsPrimaryBtn\"]"));
         buttonSignInFinal.click();
 
-        Utils.sleep(3000);
+        Utils.sleep(5000);
 
         this.statusLogin = true;
         return true;

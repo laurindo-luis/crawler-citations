@@ -13,7 +13,7 @@ public class WriteFileCSV {
         }
     }
     
-    public void setLabels(String... labels)  {
+    public void setColumnLabels(String... labels)  {
         try {
             String title = "";
             for (String label : labels) {
@@ -29,8 +29,8 @@ public class WriteFileCSV {
 
     public void write(Paper paper) {
         try {
-            bufferedWriter.write(String.format("%s;%s;%s;%s;%s\n", paper.getDoi(), paper.getTitle(),
-                    paper.getSource(), paper.getYear(), paper.getNumberOfCitations()));
+            bufferedWriter.write(String.format("%s;%s;%s;%s;%s;%s\n", paper.getDoi(), paper.getTitle(),
+                    paper.getSource(), paper.getYear(), paper.getNumberOfCitations(), paper.getUrl()));
         } catch (IOException e) {
             e.printStackTrace();
         }

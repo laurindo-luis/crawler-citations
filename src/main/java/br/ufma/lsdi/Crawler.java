@@ -1,7 +1,8 @@
 package br.ufma.lsdi;
 
+import br.ufma.lsdi.authentication.Credential;
 import br.ufma.lsdi.authentication.LoginDigitalLibrary;
-import br.ufma.lsdi.authentication.ScopusLogin;
+import br.ufma.lsdi.authentication.ScopusLoginDigitalLibrary;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -13,8 +14,6 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static java.util.Objects.nonNull;
-
 public class Crawler {
     private final WebDriver webDriver;
 
@@ -24,8 +23,9 @@ public class Crawler {
             "div/div/div[2]/div[2]/div[1]/div[1]";
     private final String XPathCitationsACM = "//*[@id=\"pb-page-content\"]/div/main/div[2]/article/div[1]/div[2]" +
             "/div/div[6]/div/div[1]/div/ul/li[1]/span/span[1]";
+    private final String XPathCitationsScopus = "//*[@id=\"recordPageBoxes\"]/div/div[1]/h3";
 
-    LoginDigitalLibrary loginDigitalLibrary = new ScopusLogin();
+    LoginDigitalLibrary loginDigitalLibraryScopus = new ScopusLoginDigitalLibrary();
 
     Crawler() {
         System.setProperty("webdriver.chrome.driver",
@@ -40,29 +40,30 @@ public class Crawler {
     public List<Paper> searchCitations(List<Paper> papers) {
         List<Paper> listPapers = new ArrayList<>();
         WriteFileCSV writeFileCSV = new WriteFileCSV("articles_citations.csv");
-        writeFileCSV.setLabels("Doi", "Title", "Digital Library", "Year", "Number of Citations");
+        writeFileCSV.setColumnLabels("Doi", "Title", "Digital Library", "Year", "Number of Citations", "Url");
 
         papers.forEach(paper -> {
             if(!paper.getDoi().isEmpty() || !paper.getUrl().isEmpty()) {
-                System.out.println("> Search citation paper "+paper.getTitle());
 
-                if(paper.getSource().equals("Scopus") && !paper.getUrl().isEmpty())
+                if(paper.getSource().equals("Scopus") && !paper.getUrl().isEmpty()) {
+                    if(!loginDigitalLibraryScopus.isStatusLogin()) {
+                        Credential credential = ReaderFile.readCredentias("assets/credential_scopus.txt");
+                        loginDigitalLibraryScopus.authentication(
+                                webDriver, credential.getUser(), credential.getPassword()
+                        );
+                    }
                     webDriver.get(paper.getUrl());
-                else
+                } else {
                     webDriver.get(paper.getDoi());
-
+                }
+                System.out.println("> Searching citation paper "+paper.getTitle());
                 String urlBrowser = webDriver.getCurrentUrl();
-                Utils.sleep(3000);
+                Utils.sleep(5000);
 
                 String numberOfCitations = "0";
                 if(urlBrowser.contains("www.scopus.com")) {
-//                    if(loginDigitalLibrary.isStatusLogin()) {
-//
-//                    } else {
-//                        loginDigitalLibrary.authentication(webDriver, "luis.laurindo@discente.ufma.br",
-//                                "rockandrollcar1996");
-//                        System.out.println("Realizar Login");
-//                    }
+                    String textCitations = webDriver.findElement(By.xpath(XPathCitationsScopus)).getText();
+                    numberOfCitations = textCitations.replaceAll("[^0-9]+", "");
                 } else if(urlBrowser.contains("dl.acm.org")) {
                     numberOfCitations = webDriver.findElement(By.xpath(XPathCitationsACM)).getText();
                 } else if(urlBrowser.contains("ieeexplore.ieee.org")) {
@@ -87,10 +88,11 @@ public class Crawler {
                         .setTitle(paper.getTitle())
                         .setYear(paper.getYear())
                         .setSource(paper.getSource())
+                        .setUrl(paper.getUrl())
                         .setNumberOfCitation(Integer.valueOf(numberOfCitations))
                         .build();
 
-                System.out.println(String.format("%s citations", paperResponse.getNumberOfCitations()));
+                System.out.println(paperResponse.getNumberOfCitations()+" citations");
                 writeFileCSV.write(paperResponse);
                 listPapers.add(paperResponse);
             }
