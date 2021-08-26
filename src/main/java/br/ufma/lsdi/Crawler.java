@@ -1,5 +1,7 @@
 package br.ufma.lsdi;
 
+import br.ufma.lsdi.authentication.LoginDigitalLibrary;
+import br.ufma.lsdi.authentication.ScopusLogin;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -12,7 +14,7 @@ import java.util.List;
 import static java.util.Objects.nonNull;
 
 public class Crawler {
-    private WebDriver webDriver;
+    private final WebDriver webDriver;
 
     private final String XPathCitationsScienceDirect = "//*[@id=\"citing-articles-header\"]";
     private final String XPathCitationsIEEEXplorer = "//*[@id=\"LayoutWrapper\"]/div/div/div/div[3]/div/" +
@@ -20,6 +22,8 @@ public class Crawler {
             "div/div/div[2]/div[2]/div[1]/div[1]";
     private final String XPathCitationsACM = "//*[@id=\"pb-page-content\"]/div/main/div[2]/article/div[1]/div[2]" +
             "/div/div[6]/div/div[1]/div/ul/li[1]/span/span[1]";
+
+    LoginDigitalLibrary loginDigitalLibrary = new ScopusLogin();
 
     Crawler() {
         System.setProperty("webdriver.chrome.driver",
@@ -50,7 +54,16 @@ public class Crawler {
                 }
 
                 String numberOfCitations = "0";
-                if(url.contains("dl.acm.org")) {
+
+                if(url.contains("www.scopus.com")) {
+
+                    if(!loginDigitalLibrary.isStatusLogin()) {
+                        //Realizar Login
+                        loginDigitalLibrary.authentication(webDriver, "luis.laurindo@discente.ufma.br",
+                                "rockandrollcar1996");
+                    }
+
+                } else if(url.contains("dl.acm.org")) {
                     numberOfCitations = webDriver.findElement(By.xpath(XPathCitationsACM)).getText();
                 } else if(url.contains("ieeexplore.ieee.org")) {
                     String textCitations = webDriver.findElement(By.xpath(XPathCitationsIEEEXplorer)).getText();
@@ -67,6 +80,7 @@ public class Crawler {
                         .setDoi(paper.getDoi())
                         .setTitle(paper.getTitle())
                         .setYear(paper.getYear())
+                        .setSource(paper.getSource())
                         .setNumberOfCitation(Integer.valueOf(numberOfCitations))
                         .build();
 

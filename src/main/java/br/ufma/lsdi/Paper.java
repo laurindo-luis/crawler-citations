@@ -3,6 +3,7 @@ package br.ufma.lsdi;
 public class Paper {
     private String doi;
     private String title;
+    private String source;
     private Integer year;
     private Integer numberOfCitations;
 
@@ -25,6 +26,11 @@ public class Paper {
 
         public Builder setYear(Integer year) {
             paper.setYear(year);
+            return this;
+        }
+
+        public Builder setSource(String source) {
+            paper.setSource(source);
             return this;
         }
 
@@ -54,6 +60,14 @@ public class Paper {
         return title;
     }
 
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
+    }
+
     public void setTitle(String title) {
         this.title = title;
     }
@@ -68,6 +82,7 @@ public class Paper {
 
     @Override
     public String toString() {
-        return String.format("DOI: %s | Title: %s | Year: %s", doi, title, year);
+        return String.format("DOI: %s | Title: %s | Year: %s | Source: %s", doi, title, year,
+                source);
     }
 }
