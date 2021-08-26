@@ -15,6 +15,8 @@ public class Crawler {
     private final String XPathCitationsIEEEXplorer = "//*[@id=\"LayoutWrapper\"]/div/div/div/div[3]/div/" +
             "xpl-root/div/xpl-document-details/div/div[1]/section[2]/div/xpl-document-header/section/div[2]/" +
             "div/div/div[2]/div[2]/div[1]/div[1]";
+    private final String XPathCitationsACM = "//*[@id=\"pb-page-content\"]/div/main/div[2]/article/div[1]/div[2]" +
+            "/div/div[6]/div/div[1]/div/ul/li[1]/span/span[1]";
 
     Crawler() {
         System.setProperty("webdriver.chrome.driver",
@@ -31,10 +33,11 @@ public class Crawler {
         writeFileCSV.setLabels("Doi", "Title", "Year", "Number of Citations");
 
         papers.forEach(paper -> {
-            webDriver.get("https://".concat(paper.getDoi()));
-            String url = webDriver.getCurrentUrl();
 
             if(!paper.getDoi().isEmpty()) {
+                webDriver.get("https://".concat(paper.getDoi()));
+                String url = webDriver.getCurrentUrl();
+
                 System.out.println(String.format("> Search citation paper %s. DOI %s",
                         paper.getTitle(), paper.getDoi()));
                 try {
@@ -43,8 +46,10 @@ public class Crawler {
                     e.printStackTrace();
                 }
 
-                String numberOfCitations = "";
-                if(url.contains("ieeexplore.ieee.org")) {
+                String numberOfCitations = "0";
+                if(url.contains("dl.acm.org")) {
+                    numberOfCitations = webDriver.findElement(By.xpath(XPathCitationsACM)).getText();
+                } else if(url.contains("ieeexplore.ieee.org")) {
                     String textCitations = webDriver.findElement(By.xpath(XPathCitationsIEEEXplorer)).getText();
                     if(textCitations.contains("Citation"))
                         numberOfCitations = textCitations.split("\n")[0];

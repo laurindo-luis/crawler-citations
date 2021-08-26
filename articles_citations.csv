@@ -1,25 +1,27 @@
 Doi;Title;Year;Number of Citations
-doi.org/10.1109/INFOCOM.2017.8056954;;2017;7
-doi.org/10.1109/JBHI.2013.2282864;;2014;26
-doi.org/10.1109/ICC.2017.7997412;;2017;1
-doi.org/10.23919/FRUCT.2016.7892202;;2016;6
-doi.org/10.1109/ICAC3.2017.8318793;;2017;1
-doi.org/10.1109/ICPADS.2015.24;;2015;5
-doi.org/10.1109/CEIT.2016.7929076;;2016;2
-doi.org/10.1109/ACCESS.2017.2762078;;2017;1
-doi.org/10.1109/TSP.2012.2236320;;2013;65
-doi.org/10.1109/CCNC.2018.8319222;;2018;3
-doi.org/10.1109/ICSPCC.2013.6664010;;2013;2
-doi.org/10.1109/EIT.2016.7535236;;2016;5
-doi.org/10.1109/ASICON.2015.7517194;;2015;5
-doi.org/10.1109/ACCESS.2019.2944573;;2019;1
-doi.org/10.1109/ICC.2015.7249347;;2015;6
-doi.org/10.1109/ABLAZE.2015.7155007;;2015;3
-doi.org/10.1109/ACCESS.2021.3104643;;2021;0
-doi.org/10.1109/ICCCNT45670.2019.8944793;;2019;0
-doi.org/10.1109/WMNC.2011.6097231;;2011;10
-doi.org/10.1109/ICASE.2015.7489527;;2015;0
-doi.org/10.1109/GLOCOM.2015.7417058;;2015;1
-doi.org/10.1109/GLOBECOM38437.2019.9014118;;2019;0
-doi.org/10.1109/HealthCom.2015.7454587;;2015;1
-doi.org/10.1109/SPIT.2018.8350860;;2018;1
+doi.org/10.1145/1859823.1859825;A Tool for Designing High-Confidence Implantable Biosensor Networks for Medical Monitoring;0;1
+doi.org/10.1145/2508859.2516658;Heart-to-Heart (H2H): Authentication for Implanted Medical Devices;2013;94
+doi.org/10.1145/3123024.3124409;When Generalized Eating Detection Machine Learning Models Fail in the Field;2017;8
+doi.org/10.1145/3359626;Security and Privacy Approaches in Mixed Reality: A Literature Survey;2019;10
+doi.org/10.1145/3293614.3293615;Performance Evaluation of Wireless Mesh Networks in Smart Cities Scenarios;2018;0
+doi.org/10.1145/2593882.2593884;Software Engineering for Mobility: Reflecting on the Past, Peering into the Future;2014;14
+doi.org/10.1145/3186591;Designing Emotionally Sentient Agents;2018;19
+doi.org/10.1145/3380994;How Does Fitbit Measure Brainwaves: A Qualitative Study into the Credibility of Sleep-Tracking Technologies;2020;1
+doi.org/10.1145/2185448.2185454;BANA: Body Area Network Authentication Exploiting Channel Characteristics;2012;27
+doi.org/10.1145/3399715.3400864;Data4Good: Designing for Diversity and Development;2020;0
+doi.org/10.1145/2093698.2093799;Body-Centric RFID Systems;2011;1
+doi.org/10.1145/2090296.2090297;Wireless Sensor Networks in the Wild: Three Practical Issues after a Middleware Deployment;2011;4
+doi.org/10.1145/3123021.3123059;Combining Capacitive Coupling with Conductive Clothes: Towards Resource-Efficient Wearable Communication;2017;4
+doi.org/10.1145/2932190;Energy-Efficient Aquatic Environment Monitoring Using Smartphone-Based Robots;2016;9
+doi.org/10.1145/2971648.2971713;The Night is Young: Urban Crowdsourcing of Nightlife Patterns;2016;22
+doi.org/10.1145/3321480;Publish or Drop Traffic Event Alerts? Quality-Aware Decision Making in Participatory Sensing-Based Vehicular CPS;2019;3
+doi.org/10.1145/3130902;EarBit: Using Wearable Sensors to Detect Eating Episodes in Unconstrained Environments;2017;85
+doi.org/10.1145/2737095.2737100;Samba: A Smartphone-Based Robot System for Energy-Efficient Aquatic Environment Monitoring;2015;5
+doi.org/10.1145/2494091.2499775;ConferenceSense: Monitoring of Public Events Using Phone Sensors;2013;4
+doi.org/10.1145/3191735;Students' Experiences with Ecological Momentary Assessment Tools to Report on Emotional Well-Being;2018;14
+doi.org/10.1007/s00779-013-0706-7;Classifying Watermelon Ripeness by Analysing Acoustic Signals Using Mobile Devices;2014;0
+doi.org/10.1145/3382507.3418846;How Good is Good Enough? The Impact of Errors in Single Person Action Classification on the Modeling of Group Interactions in Volleyball;2020;0
+doi.org/10.1145/2971648.2971712;Cognitive Rhythms: Unobtrusive and Continuous Sensing of Alertness Using a Mobile Phone;2016;43
+doi.org/10.1145/3376897.3377864;The Final Frontier: Deep Learning in Space;2020;3
+doi.org/10.1145/2030066.2030068;Building Smart Communities with Cyber-Physical Systems;2011;19
+doi.org/10.1145/2971485.2971547;Designing for Tangible Affective Interaction;2016;7

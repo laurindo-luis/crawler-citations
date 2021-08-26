@@ -1,7 +1,8 @@
 package br.ufma.lsdi;
 
-import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 
 import java.io.*;
@@ -23,7 +24,16 @@ public class ReaderFile {
                 Integer numberRow = row.getRowNum();
                 if(!numberRow.equals(0)) {
                     String title = isNull(row.getCell(1)) ? "" : row.getCell(1).getStringCellValue();
-                    String year =  isNull(row.getCell(4)) ? "" : row.getCell(4).getStringCellValue();
+                    String year;
+                    Cell cellYear = row.getCell(4);
+                    if(!isNull(cellYear)) {
+                        if(cellYear.getCellType().equals(CellType.NUMERIC))
+                            year = String.valueOf((int)cellYear.getNumericCellValue());
+                        else
+                            year = cellYear.getStringCellValue();
+                    } else {
+                        year = "0";
+                    }
                     String doi = isNull(row.getCell(10)) ? "" : row.getCell(10).getStringCellValue();
                     String status = isNull(row.getCell(24)) ? "" : row.getCell(24).getStringCellValue();
 
