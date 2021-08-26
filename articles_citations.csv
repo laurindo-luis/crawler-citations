@@ -1,64 +1,25 @@
-Doi,Title,Year,Number of Citations
-doi.org/10.1016/j.adhoc.2021.102554,An adaptive backoff and dynamic clear channel assessment mechanisms in IEEE 802.15.4 MAC for wireless body area networks,2021,0
-doi.org/10.1016/j.bios.2021.113249,Integrated non-invasive biochemical and biophysical sensing systems for health and performance monitoring: A systems perspective,2021,0
-doi.org/10.1016/j.jocs.2014.02.008,A mobile wireless body area network platform,2014,22
-doi.org/10.1016/j.ifacol.2015.10.161,Preliminary developments towards closed-loop FES-assistance of posture and gait,2015,4
-doi.org/10.1016/j.sna.2021.113006,A highly stretchable hydrogel sensor for soft robot multi-modal perception,2021,0
-doi.org/10.1016/B978-0-12-820581-5.00014-6,Chapter 8 - IoT for healthcare applications,2021,0
-doi.org/10.1016/B978-0-12-819870-4.00022-0,Chapter 23 - Nanosensor networks for smart health care,2020,0
-doi.org/10.1016/j.carbon.2020.07.042,Weavable and stretchable piezoresistive carbon nanotubes-embedded nanofiber sensing yarns for highly sensitive and multimodal wearable textile sensor,2020,15
-doi.org/10.1016/j.bspc.2021.102944,Designing GA based effective transmission strategies for intra-WBAN communication,2021,0
-doi.org/10.1016/j.future.2019.01.028,UAV-enabled healthcare architecture: Issues and challenges,2019,27
-doi.org/10.1016/j.cosrev.2017.12.002,Parametric survey on cross-layer designs for wireless sensor networks,2018,26
-doi.org/10.1016/j.avb.2020.101541,Computational efficient wearable sensor network health monitoring system for sports athletics using IoT,2020,2
-doi.org/10.1016/j.cmpb.2020.105903,The Role of the Internet of Things in Healthcare: Future Trends and Challenges,2021,1
-doi.org/10.1016/j.pcl.2020.04.016,Creating a Learning Televillage and Automated Digital Child Health Ecosystem,2020,0
-doi.org/10.1016/B978-0-08-100574-3.00007-2,7 - Communication protocols for vital signs sensors used for the monitoring of athletes,2016,2
-doi.org/10.1016/j.neubiorev.2018.06.020,Working definitions, subjective and objective assessments and experimental paradigms in a study exploring social withdrawal in schizophrenia and Alzheimer’s disease,2019,7
-doi.org/10.1016/j.dss.2020.113447,A group decision-making approach for exploring trends in the development of the healthcare industry in Taiwan,2021,9
-doi.org/10.1016/j.future.2019.08.009,Intelligence and security in big 5G-oriented IoNT: An overview,2020,47
-doi.org/10.1016/j.neuroimage.2021.118254,Beyond fingerprinting: Choosing predictive connectomes over reliable connectomes,2021,0
-doi.org/10.1016/j.nancom.2021.100353,A survey on energy efficiency intrabody communication techniques for wearable devices,2021,0
-doi.org/10.1016/j.procs.2013.06.129,The Impact of Nodes Embedded with Data Processing Unit on Energy Consumption in a Wireless BAN,2013,0
-doi.org/10.1016/j.comnet.2018.12.008,Internet of Things applications: A systematic review,2019,140
-doi.org/10.1016/j.measurement.2020.108272,An intelligent based healthcare security monitoring schemes for detection of node replication attack in wireless sensor networks,2021,5
-doi.org/10.1016/j.jii.2020.100129,Industry 4.0 and Health: Internet of Things, Big Data, and Cloud Computing for Healthcare 4.0,2020,117
-doi.org/10.1016/j.comcom.2012.03.004,Distributed media-aware flow scheduling in cloud computing environment,2012,25
-doi.org/10.1016/B978-012373583-6.50026-8,22 - From Telemedicine to Ubiquitous M-Health: The Evolution of E-Health Systems,2008,7
-doi.org/10.1016/j.ijhcs.2021.102650,Recognising Intrinsic Motivation using Smartphone Trajectories,2021,0
-doi.org/10.1016/j.ijinfomgt.2018.08.004,Mobile edge computing based QoS optimization in medical healthcare applications,2019,58
-doi.org/10.1016/j.jpsychires.2021.04.013,Predicting self-injurious thoughts in daily life using ambulatory assessment of state cognition,2021,0
-doi.org/10.1016/j.matpr.2021.01.606,Integration of blockchain technology for security and privacy in internet of things,2021,0
-doi.org/10.1016/j.jpsychires.2021.01.019,Using machine learning analyses of speech to classify levels of expressed emotion in parents of youth with mood disorders,2021,0
-doi.org/10.1016/j.procs.2021.02.028,Research and design of a high-security configurable RO-PUF based on FPGA,2021,0
-doi.org/10.1016/j.jmst.2019.10.019,A flexible and high temperature tolerant strain sensor of La0.7Sr0.3MnO3/Mica,2020,2
-doi.org/10.1016/j.ins.2014.06.011,PHDA: A priority based health data aggregation with privacy preservation for cloud assisted WBANs,2014,68
-doi.org/10.1016/j.jiph.2020.06.027,Secure and energy-efficient framework using Internet of Medical Things for e-healthcare,2020,21
-doi.org/10.1016/B978-0-12-407684-6.00002-4,Chapter 2 - M2M to IoT – The Vision,2014,0
-doi.org/10.1016/j.bbe.2021.02.007,A comprehensive survey on low-cost ECG acquisition systems: Advances on design specifications, challenges and future direction,2021,2
-doi.org/10.1016/j.adhoc.2019.102059,A study of a one-turn circular patch antenna array and the influence of the human body on the characteristics of the antenna,2020,3
-doi.org/10.1016/B978-0-12-824473-9.00003-3,Chapter 11 - Smart sensing systems for in-home health status and emotional well-being monitoring during COVID-19,2021,0
-doi.org/10.1016/B978-0-12-819511-6.00015-7,Chapter 15 - Wireless medical sensor networks for smart e-healthcare,2020,0
-doi.org/10.1016/j.otc.2011.08.013,Cell Phones in Telehealth and Otolaryngology,2011,10
-doi.org/10.1016/j.avb.2021.101601,Big data and ambient intelligence in IoT-based wireless student health monitoring system,2021,1
-doi.org/10.1016/j.measurement.2020.108249,Fuzzy allocation model for health care data management on IoT assisted wearable sensor platform,2020,1
-doi.org/10.1016/B978-0-12-819664-9.00008-9,Chapter 8 - Remote health monitoring protocols for IoT-enabled healthcare infrastructure,2021,0
-doi.org/10.1016/j.future.2017.02.014,Exploiting smart e-Health gateways at the edge of healthcare Internet-of-Things: A fog computing approach,2018,484
-doi.org/10.1016/j.comnet.2021.108078,Transfer reinforcement learning-based road object detection in next generation IoT domain,2021,1
-doi.org/10.1016/j.procs.2016.07.341,Security Policies for Intelligent Health Care Environment,2016,1
-doi.org/10.1016/B978-0-323-26208-8.00008-X,Chapter 8 - Reliability and security of implantable and wearable medical devices,2015,5
-doi.org/10.1016/j.copsyc.2020.04.005,AI in mental health,2020,10
-doi.org/10.1016/j.carbon.2020.06.084,Laser-induced graphene enabled 1D fiber electronics,2020,10
-doi.org/10.1016/j.procs.2020.01.100,Privacy Preservation and Signature Aggregation for Medical Data,2019,0
-doi.org/10.1016/j.matpr.2021.01.700,DESD-CAT inspired algorithm for establishing trusted connection in energy efficient FoG-BAN networks,2021,0
-doi.org/10.1016/j.comnet.2019.01.014,An efficient resource allocation algorithm based on vertex coloring to mitigate interference among coexisting WBANs,2019,2
-doi.org/10.1016/j.ijlp.2019.101498,Mapping the rise of digital mental health technologies: Emerging issues for law and society,2019,6
-doi.org/10.1016/j.iot.2019.100119,Energy-efficient modified DCC-MAC protocol for IoT in e-health applications,2021,0
-doi.org/10.1016/j.procs.2021.03.038,PPG-KeyGen: Using Photoplethysmogram for Key Generation in Wearable Devices,2021,0
-doi.org/10.1016/j.peva.2008.10.006,Energy optimization for proactive unicast route maintenance in MANETs under end-to-end reliability requirements,2009,7
-doi.org/10.1016/j.ijleo.2020.164447,A compact MIMO antenna for WBAN operating at Terahertz frequency,2020,5
-doi.org/10.1016/B978-0-12-821777-1.00016-1,Chapter 7 - Machine learning-enabled Internet of Things for medical informatics,2021,0
-doi.org/10.1016/j.procs.2018.10.174,A Fuzzy based Diagnostic Agent for Context Aware Patient Monitoring,2018,1
-doi.org/10.1016/B978-0-12-813176-3.00045-6,Chapter 45 - Ethical, policy, and research considerations for personalized psychiatry,2020,0
-doi.org/10.1016/j.measurement.2020.108252,Wearable human motion posture capture and medical health monitoring based on wireless sensor networks,2020,8
-doi.org/10.1016/j.comnet.2018.09.017,FIFO Order reliable convergec
+Doi;Title;Year;Number of Citations
+doi.org/10.1109/INFOCOM.2017.8056954;;2017;7
+doi.org/10.1109/JBHI.2013.2282864;;2014;26
+doi.org/10.1109/ICC.2017.7997412;;2017;1
+doi.org/10.23919/FRUCT.2016.7892202;;2016;6
+doi.org/10.1109/ICAC3.2017.8318793;;2017;1
+doi.org/10.1109/ICPADS.2015.24;;2015;5
+doi.org/10.1109/CEIT.2016.7929076;;2016;2
+doi.org/10.1109/ACCESS.2017.2762078;;2017;1
+doi.org/10.1109/TSP.2012.2236320;;2013;65
+doi.org/10.1109/CCNC.2018.8319222;;2018;3
+doi.org/10.1109/ICSPCC.2013.6664010;;2013;2
+doi.org/10.1109/EIT.2016.7535236;;2016;5
+doi.org/10.1109/ASICON.2015.7517194;;2015;5
+doi.org/10.1109/ACCESS.2019.2944573;;2019;1
+doi.org/10.1109/ICC.2015.7249347;;2015;6
+doi.org/10.1109/ABLAZE.2015.7155007;;2015;3
+doi.org/10.1109/ACCESS.2021.3104643;;2021;0
+doi.org/10.1109/ICCCNT45670.2019.8944793;;2019;0
+doi.org/10.1109/WMNC.2011.6097231;;2011;10
+doi.org/10.1109/ICASE.2015.7489527;;2015;0
+doi.org/10.1109/GLOCOM.2015.7417058;;2015;1
+doi.org/10.1109/GLOBECOM38437.2019.9014118;;2019;0
+doi.org/10.1109/HealthCom.2015.7454587;;2015;1
+doi.org/10.1109/SPIT.2018.8350860;;2018;1

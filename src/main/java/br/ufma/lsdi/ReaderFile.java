@@ -8,6 +8,8 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.util.Objects.isNull;
+
 public class ReaderFile {
 
     public List<Paper> reader(String path) {
@@ -20,10 +22,10 @@ public class ReaderFile {
             for (Row row : workbook.getSheetAt(0)) {
                 Integer numberRow = row.getRowNum();
                 if(!numberRow.equals(0)) {
-                    String title = row.getCell(1).getStringCellValue();
-                    String year = row.getCell(4).getStringCellValue();
-                    String doi = row.getCell(10).getStringCellValue();
-                    String status = row.getCell(24).getStringCellValue();
+                    String title = isNull(row.getCell(1)) ? "" : row.getCell(1).getStringCellValue();
+                    String year =  isNull(row.getCell(4)) ? "" : row.getCell(4).getStringCellValue();
+                    String doi = isNull(row.getCell(10)) ? "" : row.getCell(10).getStringCellValue();
+                    String status = isNull(row.getCell(24)) ? "" : row.getCell(24).getStringCellValue();
 
                     if(title.isEmpty() && year.isEmpty() && doi.isEmpty() && status.isEmpty()) {
                         break;
