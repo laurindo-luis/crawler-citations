@@ -6,6 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Crawler {
@@ -28,14 +29,14 @@ public class Crawler {
         );
     }
 
-    public void searchCitations(List<Paper> papers) {
+    public List<Paper> searchCitations(List<Paper> papers) {
+        List<Paper> listPapers = new ArrayList<>();
         WriteFileCSV writeFileCSV = new WriteFileCSV("articles_citations.csv");
         writeFileCSV.setLabels("Doi", "Title", "Year", "Number of Citations");
 
         papers.forEach(paper -> {
-
             if(!paper.getDoi().isEmpty()) {
-                webDriver.get("https://".concat(paper.getDoi()));
+                webDriver.get(paper.getDoi());
                 String url = webDriver.getCurrentUrl();
 
                 System.out.println(String.format("> Search citation paper %s. DOI %s",
@@ -55,20 +56,27 @@ public class Crawler {
                         numberOfCitations = textCitations.split("\n")[0];
                     else
                         numberOfCitations = "0";
-
                 } else if(url.contains("www.sciencedirect.com")) {
                     String textCitations = webDriver.findElement(By.xpath(XPathCitationsScienceDirect)).getText();
                     numberOfCitations = textCitations.replaceAll("[^0-9]+", "");
                 }
 
-                System.out.println(String.format("%s citations", numberOfCitations));
-                paper.setNumberOfCitations(Integer.valueOf(numberOfCitations));
-                writeFileCSV.write(paper);
+                Paper paperResponse = new Paper.Builder()
+                        .setDoi(paper.getDoi())
+                        .setTitle(paper.getTitle())
+                        .setYear(paper.getYear())
+                        .setNumberOfCitation(Integer.valueOf(numberOfCitations))
+                        .build();
+
+                System.out.println(String.format("%s citations", paperResponse.getNumberOfCitations()));
+                writeFileCSV.write(paperResponse);
+                listPapers.add(paperResponse);
             }
         });
 
         System.out.println("Successful search! Output: citations_articles.csv");
         writeFileCSV.close();
         webDriver.quit();
+        return listPapers;
     }
 }

@@ -6,10 +6,32 @@ public class Paper {
     private Integer year;
     private Integer numberOfCitations;
 
-    public Paper(String doi, String title, Integer year) {
-        this.doi = doi;
-        this.title = title;
-        this.year = year;
+    public static class Builder {
+        private Paper paper = new Paper();
+
+        public Paper build() {
+            return this.paper;
+        }
+
+        public Builder setDoi(String doi) {
+            paper.setDoi(doi);
+            return this;
+        }
+
+        public Builder setTitle(String title) {
+            paper.setTitle(title);
+            return this;
+        }
+
+        public Builder setYear(Integer year) {
+            paper.setYear(year);
+            return this;
+        }
+
+        public Builder setNumberOfCitation(Integer numberOfCitations) {
+            paper.setNumberOfCitations(numberOfCitations);
+            return this;
+        }
     }
 
     public Integer getNumberOfCitations() {
