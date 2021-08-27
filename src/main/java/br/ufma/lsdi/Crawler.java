@@ -5,6 +5,7 @@ import br.ufma.lsdi.authentication.LoginDigitalLibrary;
 import br.ufma.lsdi.authentication.ScopusLoginDigitalLibrary;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
@@ -25,7 +26,7 @@ public class Crawler {
             "/div/div[6]/div/div[1]/div/ul/li[1]/span/span[1]";
     private final String XPathCitationsScopus = "//*[@id=\"recordPageBoxes\"]/div/div[1]/h3";
 
-    LoginDigitalLibrary loginDigitalLibraryScopus = new ScopusLoginDigitalLibrary();
+    private LoginDigitalLibrary loginDigitalLibraryScopus;
 
     Crawler() {
         System.setProperty("webdriver.chrome.driver",
@@ -35,6 +36,8 @@ public class Crawler {
         this.webDriver = new ChromeDriver(
                 new ChromeOptions().setHeadless(false)
         );
+
+        this.loginDigitalLibraryScopus = new ScopusLoginDigitalLibrary();
     }
 
     public List<Paper> searchCitations(List<Paper> papers) {
@@ -47,14 +50,16 @@ public class Crawler {
 
                 if(paper.getSource().equals("Scopus") && !paper.getUrl().isEmpty()) {
                     if(!loginDigitalLibraryScopus.isStatusLogin()) {
-                        Credential credential = ReaderFile.readCredentias("assets/credential_scopus.txt");
+                        Credential credential = ReaderFile.readCredentias("assets/credentials/credential_scopus.txt");
                         loginDigitalLibraryScopus.authentication(
                                 webDriver, credential.getUser(), credential.getPassword()
                         );
                     }
                     webDriver.get(paper.getUrl());
-                } else {
+                } else if(!paper.getDoi().isEmpty()) {
                     webDriver.get(paper.getDoi());
+                } else if(!paper.getUrl().isEmpty()) {
+                    webDriver.get(paper.getUrl());
                 }
                 System.out.println("> Searching citation paper "+paper.getTitle());
                 String urlBrowser = webDriver.getCurrentUrl();
@@ -62,26 +67,39 @@ public class Crawler {
 
                 String numberOfCitations = "0";
                 if(urlBrowser.contains("www.scopus.com")) {
-                    String textCitations = webDriver.findElement(By.xpath(XPathCitationsScopus)).getText();
-                    numberOfCitations = textCitations.replaceAll("[^0-9]+", "");
-                } else if(urlBrowser.contains("dl.acm.org")) {
-                    numberOfCitations = webDriver.findElement(By.xpath(XPathCitationsACM)).getText();
-                } else if(urlBrowser.contains("ieeexplore.ieee.org")) {
-                    String textCitations = webDriver.findElement(By.xpath(XPathCitationsIEEEXplorer)).getText();
-                    if(textCitations.contains("Citation"))
-                        numberOfCitations = textCitations.split("\n")[0];
-                } else if(urlBrowser.contains("www.sciencedirect.com")) {
-                    String textCitations = webDriver.findElement(By.xpath(XPathCitationsScienceDirect)).getText();
-
-                    Pattern pattern = Pattern.compile("Citing articles \\([0-9]+\\)");
-                    Matcher matcher = pattern.matcher(textCitations);
-                    String resultMatecher = "";
-                    while (matcher.find()) {
-                        resultMatecher = matcher.group();
+                    List<WebElement> elements = webDriver.findElements(By.xpath(XPathCitationsScopus));
+                    if(elements.size() > 0) {
+                        String textCitations = elements.get(0).getText();
+                        numberOfCitations = textCitations.replaceAll("[^0-9]+", "");
                     }
-
-                    numberOfCitations = resultMatecher.replaceAll("[^0-9]+", "");
+                } else if(urlBrowser.contains("dl.acm.org")) {
+                    List<WebElement> elements = webDriver.findElements(By.xpath(XPathCitationsACM));
+                    if(elements.size() > 0) {
+                        numberOfCitations = elements.get(0).getText();
+                    }
+                } else if(urlBrowser.contains("ieeexplore.ieee.org")) {
+                    List<WebElement> elements = webDriver.findElements(By.xpath(XPathCitationsIEEEXplorer));
+                    if(elements.size() > 0) {
+                        String textCitations = elements.get(0).getText();
+                        if(textCitations.contains("Citation"))
+                            numberOfCitations = textCitations.split("\n")[0];
+                    }
+                } else if(urlBrowser.contains("www.sciencedirect.com")) {
+                    List<WebElement> elements = webDriver.findElements(By.xpath(XPathCitationsScienceDirect));
+                    if(elements.size() > 0) {
+                        String textCitations = elements.get(0).getText();
+                        Pattern pattern = Pattern.compile("Citing articles \\([0-9]+\\)");
+                        Matcher matcher = pattern.matcher(textCitations);
+                        String resultMatecher = "";
+                        while (matcher.find()) {
+                            resultMatecher = matcher.group();
+                        }
+                        numberOfCitations = resultMatecher.replaceAll("[^0-9]+", "");
+                    }
                 }
+
+                if(numberOfCitations.trim().isEmpty())
+                    numberOfCitations = "0";
 
                 Paper paperResponse = new Paper.Builder()
                         .setDoi(paper.getDoi())
