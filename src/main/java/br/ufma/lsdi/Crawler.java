@@ -40,7 +40,7 @@ public class Crawler {
         this.loginDigitalLibraryScopus = new ScopusLoginDigitalLibrary();
     }
 
-    public List<Paper> searchCitations(List<Paper> papers) {
+    public List<Paper> searchCitations(List<Paper> papers, long delay) {
         List<Paper> listPapers = new ArrayList<>();
         WriteFileCSV writeFileCSV = new WriteFileCSV("articles_citations.csv");
         writeFileCSV.setColumnLabels("Doi", "Title", "Digital Library", "Year", "Number of Citations", "Url");
@@ -63,7 +63,7 @@ public class Crawler {
                 }
                 System.out.println("> Searching citation paper "+paper.getTitle());
                 String urlBrowser = webDriver.getCurrentUrl();
-                Utils.sleep(5000);
+                Utils.sleep(delay);
 
                 String numberOfCitations = "0";
                 if(urlBrowser.contains("www.scopus.com")) {
@@ -81,7 +81,7 @@ public class Crawler {
                     List<WebElement> elements = webDriver.findElements(By.xpath(XPathCitationsIEEEXplorer));
                     if(elements.size() > 0) {
                         String textCitations = elements.get(0).getText();
-                        if(textCitations.contains("Citation"))
+                        if(textCitations.contains("Citation") && textCitations.contains("Paper"))
                             numberOfCitations = textCitations.split("\n")[0];
                     }
                 } else if(urlBrowser.contains("www.sciencedirect.com")) {
