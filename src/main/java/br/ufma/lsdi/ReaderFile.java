@@ -25,7 +25,7 @@ public class ReaderFile {
                 Integer numberRow = row.getRowNum();
                 if(!numberRow.equals(0)) {
                     String title = isNull(row.getCell(1)) ? "" : row.getCell(1).getStringCellValue();
-                    String year = "0";
+                    String year = "";
                     Cell cellYear = row.getCell(4);
                     if(nonNull(cellYear)) {
                         if(cellYear.getCellType().equals(CellType.NUMERIC))
@@ -33,6 +33,9 @@ public class ReaderFile {
                         else
                             year = cellYear.getStringCellValue();
                     }
+                    if(year.trim().equals(""))
+                        year = "0";
+
                     String source = isNull(row.getCell(5)) ? "" : row.getCell(5).getStringCellValue();
                     String doi = isNull(row.getCell(10)) ? "" : row.getCell(10).getStringCellValue();
                     String url = isNull(row.getCell(11)) ? "" : row.getCell(11).getStringCellValue();
@@ -52,6 +55,8 @@ public class ReaderFile {
                                 .build();
 
                         papers.add(paper);
+
+                        System.out.println(paper);
                     }
                 }
             }
